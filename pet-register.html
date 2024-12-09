@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar pet</title>
+</head>
+<body>
+    <header>
+        <h1>Registrar Pet</h1>
+    </header>
+
+    <main>
+        <section>
+            <h2>Cadastre seu pet</h2>
+            <form id="cadastroPet">
+                <div>
+                    <label for="petName">Nome do pet:</label>
+                    <input type="text" id="petName" placeholder="Digite o nome do seu pet" required>
+                </div>
+                <div>
+                    <label for="petType">Espécie</label>
+                    <select  id="petType" required>
+                        <opition value="" disabel selected >Selecione a espécie</opition>
+                        <opition value="Cachorro">Cachorro</opition>
+                        <opition value="Gato">Gato</opition>
+                        <opition value="Aves">Aves</opition>
+                        <opition value="Aquáticos">Aquáticos</opition>
+                        
+                    </select>
+                </div>
+                <div>
+                    <label for="petAge">Idade do Pet (em anos)</label>
+                    <input type="number" id="petAge" placeholder="Digite a idade do pet" required>
+                </div>
+                <div>
+                    <label for="petWeight">Peso do pet (Kg)</label>
+                    <input type="number" id="petWeight" placeholder="Digite o peso do pet">
+                </div>
+                <button type="submit">Cadastrar Pet</button>
+            </form>
+        </section>
+    </main>
+    <footer>
+    <p>  &copy; 2024 Amigos da Mel - Todos os direitos reservados.</p>
+    </footer>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+       const cadastroForm = document.getElementById("cadastroPet");
+   
+       cadastroForm.addEventListener("submit", async (event) => {
+           event.preventDefault();
+   
+           const nomePet = document.getElementById("petName").value;
+           const especiePet = document.getElementById("petType").value;
+           const pesoPet  = document.querySelector("#petWeight");
+           const idadePet = document.querySelector("#petAge");
+   
+           try {
+               const response = await fetch("http://localhost:8080/api/login", {
+                   method: "POST",
+                   headers: {
+                       "Content-Type": "application/json"
+                   },
+                   body: JSON.stringify({ nomePet, especiePet, pesoPet, idadePet })
+               });
+   
+               if (response.ok) {
+                   alert("Login bem-sucedido!");
+                   window.location.href = "./index";
+               } else {
+                   alert("E-mail ou senha incorretos. Tente novamente.");
+               }
+           } catch (error) {
+               console.error("Erro ao conectar ao servidor:", error);
+               alert("Erro ao conectar ao servidor. Tente novamente mais tarde.");
+           }
+       });
+   });
+   
+   </script>
+
+
+</body>
+</html>

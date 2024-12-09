@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agendamento de Serviço - Petshop</title>
+</head>
+<body>
+    <header>
+    <h1>Agendamento de Serviço</h1>
+    </header>
+    <main>
+        <section>
+            <h2>Agende um serviço</h2>
+            <form id="">
+                <div>
+                    <label for="nomeDoPet">Nome do pet</label>
+                    <input type="text" id="nomeDoPet" placeholder="Digite o nome do seu pet">
+                </div>
+                <div>
+                    <label for="nomeDoDono">Nome do dono</label>
+                    <input type="text" id="nomeDoDono" placeholder="Digite o nome do dono">
+                </div>
+                <div>
+                    <label for="typeService">Tipos de serviços</label>
+                  <select  id="typeService" required>
+                    <opition value="" disable selected>Selecione o tipo de serviço</opition>
+                    <opition value="Banho">Banho</opition>
+                    <opition value="Tosa">Tosa</opition>
+                    <opition value="Hospedagem">Hospedagem</opition>
+
+                  </select>
+                </div>
+                <div>
+                    <label for="appointmentDate">Data de Agendamento</label>
+                    <input type="" iddate="appointmentDate" placeholder="Escolha a melhor data">
+                </div>
+                <div>
+                    <label for="appointmentTime"></label>
+                    <input type="text" id="appointmentTime" required>
+                    <button type="submit"></button>
+                </div>
+            </form>
+        </section>
+    </main>
+    <footer>
+        <p>  &copy; 2024 Amigos da Mel - Todos os direitos reservados.</p>
+    </footer>
+    <script>
+          document.addEventListener("DOMContentLoaded", () => {
+       const agendamentoForm = document.getElementById("agendamentoForm");
+   
+       agendamentoForm.addEventListener("submit", async (event) => {
+           event.preventDefault();
+
+           const nomeDoDono = document.querySelector("#nomeDoDono");
+           const nomeDoPet = document.querySelector("#nomeDoPet");
+           const typeService = document.querySelector("#typeService");
+           const appointmentDate = document.querySelector("#appointmentDate");
+           const appointmentTime = document.querySelector("#appointmentTime");
+
+           
+
+
+          
+           
+          
+   
+           try {
+               const response = await fetch("http://localhost:8080/api/login", {
+                   method: "POST",
+                   headers: {
+                       "Content-Type": "application/json"
+                   },
+                   body: JSON.stringify({ nomePet, especiePet, pesoPet, idadePet })
+               });
+   
+               if (response.ok) {
+                   alert("Login bem-sucedido!");
+                   window.location.href = "./index";
+               } else {
+                   alert("E-mail ou senha incorretos. Tente novamente.");
+               }
+           } catch (error) {
+               console.error("Erro ao conectar ao servidor:", error);
+               alert("Erro ao conectar ao servidor. Tente novamente mais tarde.");
+           }
+       });
+   });
+   
+    </script>
+</body>
+</html>
